@@ -1,0 +1,3 @@
+[submodule "GithubClient-example"]
+	path = GithubClient-example
+	url = https://github.com/frogermcs/GithubClient
