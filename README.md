@@ -5,9 +5,9 @@ If you use Dagger 2 for dependency injection in your Android app you probably kn
 
 Even with all those optimizations and fully generated non-dynamic code, still there are potential performance issues hidden in our code and all 3rd parties injected via Dagger 2. 
 
-The problem with performance is that it often decreases slowly so in day-by-day development it's hard to notice that our app (or Activity or any other view) launches 50ms longer. And another 150ms, and another 100ms...
+The problem with performance is that it often decreases slowly so in day-by-day development it's hard to notice that our app (or Activity or any other view) launches 50ms longer. And another 150ms longer, and another 100ms...
 
-With Dagger2Metrics you will be able to see how much time was needed to initialize all requested dependencies (and dependencies of those dependencies).
+With **Dagger2Metrics** you will be able to see how much time was needed to initialize all requested dependencies (and dependencies of those dependencies).
 
 ![screenshot.png](https://raw.githubusercontent.com/frogermcs/dagger2metrics/master/art/dagger2metrics.png)
 
@@ -33,14 +33,17 @@ apply plugin: 'com.frogermcs.dagger2metrics'
 In your `Application` class:
 
 ```java
-@Override
-public void onCreate() {
-    super.onCreate();
-    //Use only in debug builds
-    if (BuildConfig.DEBUG) {
-        Dagger2Metrics.enableCapturing(this);
-    }
-}
+public class ExampleApplication extends Application {
+
+ @Override
+ public void onCreate() {
+     super.onCreate();
+     //Use it only in debug builds
+     if (BuildConfig.DEBUG) {
+         Dagger2Metrics.enableCapturing(this);
+     }
+  }
+ }
 ```
 
 And that's all. In your app you will see notification which opens simple summary of all finished initializations.
@@ -51,12 +54,13 @@ And that's all. In your app you will see notification which opens simple summary
 
 Dagger2Metrics captures all initializations from both - `@Module` -> `@Provides` annotated methods and `@Inject` annotated constructors.
 
-In summary you will see the most-top injected dependencies with trees of their dependencies. Each of dependency shows how much time was needed to provide this object to Dagger 2 object graph (construction time itself and with all dependencies).
+In summary you will see the most-top injected dependencies with trees of their dependencies. Each of dependency shows how much time was needed to provide this object to Dagger 2 object graph (construction time itself and overall time with all dependencies).
 
 ![screenshot.png](https://raw.githubusercontent.com/frogermcs/dagger2metrics/master/art/dagger2metrics.png)
 
 ### Why I don't see all (sub) dependencies?
-Metric trees don't show dependencies which are already provided to Dagger's graph, so only those constructed from scratch will be visible. Mainly because of readability and from a simple reason - we don't want to measure Dagger 2 performance which in most cases won't be an issue. We should be sure that our code provides requested dependencies as fast as it's possible.
+Metric trees don't show dependencies which are already provided to Dagger's graph, so only those constructed from scratch will be visible. Mainly because of readability and from a simple reason - we don't want to measure Dagger 2 performance which in most cases won't be an issue.  
+Instead we should be sure that our code provides requested dependencies as fast as it's possible.
 
 ## Customizing
 
@@ -72,10 +76,10 @@ You can adjust them to your needs.
 
 ## Example app
 
-You can check [GithubClient](https://github.com/frogermcs/githubclient) project  - example Android app which shows how to use Dagger 2. Most recent version uses Dagger2Metrics in its dabug build. 
+You can check [GithubClient](https://github.com/frogermcs/githubclient) project  - example Android app which shows how to use Dagger 2. Most recent version uses *Dagger2Metrics* for measuring construction times.
 
 ## More about Dagger 2
-If you're just starting with Dagger 2, here is the list of resources which can help you:
+If you're just starting with Dagger 2, here is the list of resources which can help you with it:
 
 [GithubClient](https://github.com/frogermcs/githubclient) - example of Github API client implemented on top of Dagger 2 DI framework. 
 
