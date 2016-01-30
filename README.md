@@ -36,7 +36,7 @@ In your `Application` class:
 @Override
 public void onCreate() {
     super.onCreate();
-    //Use in only in your debug builds
+    //Use only in debug builds
     if (BuildConfig.DEBUG) {
         Dagger2Metrics.enableCapturing(this);
     }
