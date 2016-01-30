@@ -30,8 +30,4 @@ public class MetricsActivity extends Activity {
         lvMetrics.setAdapter(adapter);
         adapter.updateMetrics(InitManager.getInstance().getListOfMetricDescriptions());
     }
-
-    public void openAboutMetrics(View view){
-        startActivity(new Intent(this, AboutMetricsActivity.class));
-    }
 }

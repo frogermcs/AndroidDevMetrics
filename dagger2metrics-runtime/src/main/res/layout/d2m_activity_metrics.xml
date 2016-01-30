@@ -21,13 +21,6 @@
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginRight="8dp"
-            android:onClick="openAboutMetrics"
-            android:background="#00000000"
-            android:src="@drawable/ic_info_white_24dp" />
     </LinearLayout>
 
     <ExpandableListView

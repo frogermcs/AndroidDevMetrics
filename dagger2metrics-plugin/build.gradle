@@ -49,9 +49,9 @@ modifyPom {
 }
 
 extraArchive {
-    sources = false
+    sources = true
     tests = true
-    javadoc = false
+    javadoc = true
 }
 
 // Bintray
