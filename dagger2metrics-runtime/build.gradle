@@ -4,8 +4,8 @@ import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
 
 apply plugin: 'com.android.library'
-apply plugin: 'com.bmuschko.nexus'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 buildscript {
     repositories {
@@ -88,41 +88,42 @@ android.libraryVariants.all { variant ->
 group = GROUP
 version = VERSION_NAME
 
-modifyPom {
-    project {
-        name "Dagger2Metrics Runtime"
-        description POM_DESCRIPTION
-        url POM_URL
-        artifactId "dagger2metrics-runtime"
-        groupId GROUP
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                groupId GROUP
+                artifactId "dagger2metrics-runtime"
 
-        scm {
-            url POM_SCM_URL
-            connection POM_SCM_CONNECTION
-            developerConnection POM_SCM_DEV_CONNECTION
-        }
+                name "Dagger2Metrics Runtime"
+                description POM_DESCRIPTION
+                url POM_URL
 
-        licenses {
-            license {
-                name POM_LICENCE_NAME
-                url POM_LICENCE_URL
-                Distribution POM_LICENCE_DIST
-            }
-        }
+                licenses {
+                    license {
+                        name POM_LICENCE_NAME
+                        url POM_LICENCE_URL
+                        Distribution POM_LICENCE_DIST
+                    }
+                }
 
-        developers {
-            developer {
-                id POM_DEVELOPER_ID
-                name POM_DEVELOPER_NAME
+                developers {
+                    developer {
+                        id POM_DEVELOPER_ID
+                        name POM_DEVELOPER_NAME
+                        email POM_DEVELOPER_EMAIL
+                    }
+                }
+
+                scm {
+                    url POM_SCM_URL
+                    connection POM_SCM_CONNECTION
+                    developerConnection POM_SCM_DEV_CONNECTION
+                }
             }
         }
     }
-}
-
-extraArchive {
-    sources = false
-    tests = true
-    javadoc = false
 }
 
 // Bintray
@@ -151,4 +152,24 @@ bintray {
             }
         }
     }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }
