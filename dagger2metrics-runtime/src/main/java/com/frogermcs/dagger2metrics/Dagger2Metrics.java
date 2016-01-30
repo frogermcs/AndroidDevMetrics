@@ -16,14 +16,18 @@ import com.frogermcs.dagger2metrics.internal.ui.MetricsActivity;
  * Created by Miroslaw Stanek on 25.01.2016.
  */
 public class Dagger2Metrics {
+    public static int WARNING_1_LIMIT_MILLIS = 30;
+    public static int WARNING_2_LIMIT_MILLIS = 50;
+    public static int WARNING_3_LIMIT_MILLIS = 100;
+
     public static void enableCapturing(Application application) {
         GraphAnalyzer.setEnabled(true);
         InitManager.getInstance().initializedMetrics.clear();
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(application)
                 .setSmallIcon(R.drawable.ic_timeline_white_18dp)
-                .setContentTitle("Dagger2Metrics")
-                .setContentText("Click to see current metrics")
+                .setContentTitle(application.getString(R.string.dagger2metrics_name))
+                .setContentText(application.getString(R.string.dagger2metrics_notification_content))
                 .setAutoCancel(false);
 
         Intent resultIntent = new Intent(application, MetricsActivity.class);

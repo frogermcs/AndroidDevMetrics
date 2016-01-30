@@ -4,16 +4,16 @@
     android:versionCode="1"
     android:versionName="1.0">
 
-    <application android:minSdkVersion="7">
+    <application>
 
         <activity
             android:name=".internal.ui.MetricsActivity"
-            android:label="@string/dagger2metrics_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".internal.ui.AboutMetricsActivity" />
+            android:icon="@mipmap/__ic_launcher_d2m"
+            android:label="@string/dagger2metrics_name"
+            android:theme="@style/Dagger2Metrics.Base" />
+        <activity
+            android:name=".internal.ui.AboutMetricsActivity"
+            android:label="@string/dagger2metrics_about_title"
+            android:theme="@style/Dagger2Metrics.Base" />
     </application>
 </manifest>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="d2m_transparent">#00FFFFFF</color>
+    <color name="d2m_bg_warning_1">#FFB74D</color>
+    <color name="d2m_bg_warning_2">#FB8C00</color>
+    <color name="d2m_bg_warning_3">#E65100</color>
+    <color name="d2m_font_warning_1_and_2">#222222</color>
+    <color name="d2m_font_warning_3">#FFFFFF</color>
+    <color name="d2m_font_default_title">#333333</color>
+    <color name="d2m_font_default_description">#777777</color>
+</resources>

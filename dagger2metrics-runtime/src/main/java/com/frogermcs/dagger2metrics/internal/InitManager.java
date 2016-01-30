@@ -1,6 +1,8 @@
 package com.frogermcs.dagger2metrics.internal;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,5 +35,13 @@ public class InitManager {
                 initializedMetrics.remove(simpleName);
             }
         }
+    }
+
+    public List<MetricDescription> getListOfMetricDescriptions() {
+        List<MetricDescription> metricDescriptions = new ArrayList<>();
+        for (InitMetric initMetric : InitManager.getInstance().initializedMetrics.values()) {
+            metricDescriptions.add(MetricDescription.InitFromMetric(initMetric));
+        }
+        return metricDescriptions;
     }
 }

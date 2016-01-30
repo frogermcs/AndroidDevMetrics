@@ -13,6 +13,6 @@ public class AboutMetricsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_metrics);
+        setContentView(R.layout.d2m_activity_about_metrics);
     }
 }

@@ -17,23 +17,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_weight="1"
-            android:text="@string/dagger2metrics_name"
+            android:text="@string/dagger2metrics_about_title"
             android:textColor="#FFFFFF"
             android:textSize="20sp" />
 
-        <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginRight="8dp"
-            android:onClick="openAboutMetrics"
-            android:background="#00000000"
-            android:src="@drawable/ic_info_white_24dp" />
     </LinearLayout>
-
-    <ListView
-        android:id="@+id/lvMetrics"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/list_item_metrics_description" />
 
 </LinearLayout>
