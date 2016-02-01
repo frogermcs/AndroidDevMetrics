@@ -1,7 +1,7 @@
 # Dagger2Metrics
 Performance metrics library for Dagger 2 initialization process.
 
-If you use Dagger 2 for dependency injection in your Android app you probably know that it's super optimized and non-reflection piece of code served by great engineers from Google (and formerly form Square). 
+If you use Dagger 2 for dependency injection in your Android app you probably know that it's super optimized and non-reflection piece of code served by great engineers from Google (and formerly from Square). 
 
 Even with all those optimizations and fully generated non-dynamic code, still there are potential performance issues hidden in our code and all 3rd parties injected via Dagger 2. 
 
