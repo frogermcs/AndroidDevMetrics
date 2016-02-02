@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:state_empty="true">
-        <layer-list>
-            <item android:width="40dp" android:height="20dp">
-                <color android:color="@color/d2m_transparent" />
-            </item>
-            <item android:gravity="center">
-                <bitmap android:src="@drawable/ic_triangle_down" />
-            </item>
-        </layer-list>
-    </item>
-    <item android:state_expanded="true">
-        <layer-list>
-            <item android:width="40dp" android:height="20dp">
-                <color android:color="@color/d2m_transparent" />
-            </item>
-            <item android:gravity="center">
-                <bitmap android:src="@drawable/ic_triangle_up" />
-            </item>
-        </layer-list>
-    </item>
-    <item android:state_expanded="false">
-        <layer-list>
-            <item android:width="40dp" android:height="20dp">
-                <color android:color="@color/d2m_transparent" />
-            </item>
-            <item android:gravity="center">
-                <bitmap android:src="@drawable/ic_triangle_down" />
-            </item>
-        </layer-list>
-    </item>
+    <item android:drawable="@drawable/ic_triangle_down" android:state_empty="true" />
+    <item android:drawable="@drawable/ic_triangle_up" android:state_expanded="true" />
+    <item android:drawable="@drawable/ic_triangle_down" android:state_expanded="false" />
 </selector>
