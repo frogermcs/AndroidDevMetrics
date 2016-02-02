@@ -10,8 +10,9 @@ import java.util.Set;
  */
 public class InitMetric {
 
-    public long initTimeMillis = 0;
     public Class<?> cls;
+    public long initTimeMillis = 0;
+    public int instanceNo = 0;
     public Set<InitMetric> args = new HashSet<>();
 
     public long getTotalInitTime() {
@@ -27,16 +28,22 @@ public class InitMetric {
     }
 
     public String getClassName() {
+        String className;
         if (Proxy.isProxyClass(cls)) {
             final Class<?>[] interfaces = cls.getInterfaces();
             if (interfaces.length == 1) {
-                return interfaces[0].getSimpleName();
+                className = interfaces[0].getSimpleName();
             } else {
-                return Arrays.asList(interfaces).toString();
+                className = Arrays.asList(interfaces).toString();
             }
         } else {
-            return cls.getSimpleName();
+            className = cls.getSimpleName();
         }
+
+        if (instanceNo > 0) {
+            return className + "#" + Integer.toString(instanceNo);
+        }
+        return className;
     }
 
     @Override
