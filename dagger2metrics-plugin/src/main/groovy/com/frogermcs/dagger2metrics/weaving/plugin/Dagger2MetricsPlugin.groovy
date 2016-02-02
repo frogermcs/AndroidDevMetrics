@@ -26,7 +26,7 @@ class Dagger2MetricsPlugin implements Plugin<Project> {
     }
 
     project.dependencies {
-      debugCompile 'com.frogermcs.dagger2metrics:dagger2metrics-runtime:0.2'
+      debugCompile 'com.frogermcs.dagger2metrics:dagger2metrics-runtime:0.2.1'
       debugCompile 'org.aspectj:aspectjrt:1.8.8'
       compile 'com.android.support:support-v4:23.1.1'
     }

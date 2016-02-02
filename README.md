@@ -22,7 +22,7 @@ In your `build.gradle`:
   }
 
   dependencies {
-    classpath 'com.frogermcs.dagger2metrics:dagger2metrics-plugin:0.2'
+    classpath 'com.frogermcs.dagger2metrics:dagger2metrics-plugin:0.2.1'
   }
 }
 
