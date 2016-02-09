@@ -1,5 +1,8 @@
 # Dagger2Metrics
+
 Performance metrics library for Dagger 2 initialization process.
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Dagger2Metrics-green.svg?style=true)](https://android-arsenal.com/details/1/3120)
 
 If you use Dagger 2 for dependency injection in your Android app you probably know that it's super optimized and non-reflection piece of code served by great engineers from Google (and formerly from Square). 
 
