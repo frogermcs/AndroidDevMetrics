@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.frogermcs.androiddevmetrics"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <application>
+
+        <activity
+            android:name="com.frogermcs.androiddevmetrics.internal.ui.MetricsActivity"
+            android:icon="@mipmap/__ic_launcher_d2m"
+            android:label="@string/adm_name"
+            android:theme="@style/AndroidDevMetrics.Base" />
+        <activity
+            android:name="com.frogermcs.androiddevmetrics.internal.ui.AboutMetricsActivity"
+            android:label="@string/adm_about_title"
+            android:theme="@style/AndroidDevMetrics.Base" />
+    </application>
+</manifest>

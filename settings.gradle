@@ -1,4 +1,4 @@
 include ':GithubClient-example'
-include ':dagger2metrics-runtime'
-include ':dagger2metrics-plugin'
+include ':androiddevmetrics-runtime'
+include ':androiddevmetrics-plugin'
 project(':GithubClient-example').projectDir = new File('GithubClient-example/app')

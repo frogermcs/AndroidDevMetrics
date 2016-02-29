@@ -6,13 +6,13 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.0.0-alpha8'
+        classpath 'com.android.tools.build:gradle:2.0.0-beta5'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'org.aspectj:aspectjtools:1.8.8'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.3'
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-        classpath 'com.frogermcs.dagger2metrics:dagger2metrics-plugin:0.2'
+        classpath 'com.frogermcs.dagger2metrics:dagger2metrics-plugin:0.2.1'
     }
 }
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:orientation="vertical">
+
+    <ExpandableListView
+        android:id="@+id/lvActivitiesMetrics"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="#999999"
+        android:dividerHeight="1dp"
+        android:groupIndicator="@drawable/ic_metrics_group_indicator"
+        tools:listitem="@layout/adm_list_item_metrics_description" />
+
+</LinearLayout>

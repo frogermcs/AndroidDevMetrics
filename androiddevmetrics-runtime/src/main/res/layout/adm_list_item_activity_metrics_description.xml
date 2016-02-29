@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/EntryDescriptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Created instances: " />
+
+            <TextView
+                style="@style/EntryDescriptionStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Frame drops (count/avg fps):" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvInstancesCount"
+                style="@style/EntryValueStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="5" />
+
+            <TextView
+                android:id="@+id/tvFrameDrops"
+                style="@style/EntryValueStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 / 35.5fps" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        style="@style/EntryDescriptionStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="Lifecycle metrics (avg for all instances):" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingRight="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingLeft="8dp">
+
+            <TextView
+                style="@style/EntryDescriptionStyle.NoMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="onCreate():" />
+
+            <TextView
+                style="@style/EntryDescriptionStyle.NoMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="onStart(): " />
+
+            <TextView
+                style="@style/EntryDescriptionStyle.NoMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="onResume(): " />
+
+            <TextView
+                style="@style/EntryDescriptionStyle.NoMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="layout: " />
+
+            <TextView
+                style="@style/EntryDescriptionStyle.NoMargin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Overall:"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvOnCreateTime"
+                style="@style/EntryValueStyle.NoMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="230ms" />
+
+            <TextView
+                android:id="@+id/tvOnStartTime"
+                style="@style/EntryValueStyle.NoMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="130ms" />
+
+            <TextView
+                android:id="@+id/tvOnResumeTime"
+                style="@style/EntryValueStyle.NoMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="230ms" />
+
+            <TextView
+                android:id="@+id/tvOnLayoutTime"
+                style="@style/EntryValueStyle.NoMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="230ms" />
+
+            <TextView
+                android:id="@+id/tvOverallTime"
+                style="@style/EntryValueStyle.NoMargin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="230ms" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_marginTop="16dp"
+        android:layout_height="1dp"
+        android:background="#cccccc" />
+</LinearLayout>

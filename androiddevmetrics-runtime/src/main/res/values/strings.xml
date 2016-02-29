@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="adm_name">AndroidDevMetrics</string>
+    <string name="adm_about_title">About AndroidDevMetrics</string>
+    <string name="adm_notification_content">Click to see current metrics</string>
+</resources>

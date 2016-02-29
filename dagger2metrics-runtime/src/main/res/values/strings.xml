@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="dagger2metrics_name">Dagger2metrics</string>
-    <string name="dagger2metrics_about_title">About Dagger2metrics</string>
-    <string name="dagger2metrics_notification_content">Click to see current metrics</string>
-</resources>
