@@ -5,29 +5,29 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
-    <style name="EntryStyle">
+    <style name="AdmEntryStyle">
         <item name="android:textColor">#333333</item>
         <item name="android:textSize">16sp</item>
     </style>
 
-    <style name="EntryDescriptionStyle">
+    <style name="AdmEntryDescriptionStyle">
         <item name="android:textColor">#666666</item>
         <item name="android:textSize">15sp</item>
         <item name="android:layout_marginBottom">4dp</item>
     </style>
 
-    <style name="EntryDescriptionStyle.NoMargin">
+    <style name="AdmEntryDescriptionStyle.NoMargin">
         <item name="android:layout_marginBottom">0dp</item>
     </style>
 
-    <style name="EntryValueStyle">
+    <style name="AdmEntryValueStyle">
         <item name="android:textColor">#333333</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">4dp</item>
     </style>
 
-    <style name="EntryValueStyle.NoMargin">
+    <style name="AdmEntryValueStyle.NoMargin">
         <item name="android:layout_marginBottom">0dp</item>
     </style>
 

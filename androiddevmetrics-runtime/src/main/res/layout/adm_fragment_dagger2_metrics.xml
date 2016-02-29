@@ -14,4 +14,11 @@
         android:dividerHeight="1dp"
         android:groupIndicator="@drawable/ic_metrics_group_indicator"
         tools:listitem="@layout/adm_list_item_metrics_description" />
+
+    <TextView
+        android:gravity="center"
+        android:id="@+id/tvEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

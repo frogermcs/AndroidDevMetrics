@@ -8,12 +8,8 @@
 
         <activity
             android:name="com.frogermcs.androiddevmetrics.internal.ui.MetricsActivity"
-            android:icon="@mipmap/__ic_launcher_d2m"
+            android:icon="@mipmap/__ic_launcher_adm"
             android:label="@string/adm_name"
-            android:theme="@style/AndroidDevMetrics.Base" />
-        <activity
-            android:name="com.frogermcs.androiddevmetrics.internal.ui.AboutMetricsActivity"
-            android:label="@string/adm_about_title"
             android:theme="@style/AndroidDevMetrics.Base" />
     </application>
 </manifest>

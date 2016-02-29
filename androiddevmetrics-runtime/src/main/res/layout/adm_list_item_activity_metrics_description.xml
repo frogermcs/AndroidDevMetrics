@@ -18,13 +18,13 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/EntryDescriptionStyle"
+                style="@style/AdmEntryDescriptionStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Created instances: " />
 
             <TextView
-                style="@style/EntryDescriptionStyle"
+                style="@style/AdmEntryDescriptionStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Frame drops (count/avg fps):" />
@@ -38,14 +38,14 @@
 
             <TextView
                 android:id="@+id/tvInstancesCount"
-                style="@style/EntryValueStyle"
+                style="@style/AdmEntryValueStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="5" />
 
             <TextView
                 android:id="@+id/tvFrameDrops"
-                style="@style/EntryValueStyle"
+                style="@style/AdmEntryValueStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10 / 35.5fps" />
@@ -53,7 +53,7 @@
     </LinearLayout>
 
     <TextView
-        style="@style/EntryDescriptionStyle"
+        style="@style/AdmEntryDescriptionStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
@@ -74,31 +74,31 @@
             android:paddingLeft="8dp">
 
             <TextView
-                style="@style/EntryDescriptionStyle.NoMargin"
+                style="@style/AdmEntryDescriptionStyle.NoMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="onCreate():" />
 
             <TextView
-                style="@style/EntryDescriptionStyle.NoMargin"
+                style="@style/AdmEntryDescriptionStyle.NoMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="onStart(): " />
 
             <TextView
-                style="@style/EntryDescriptionStyle.NoMargin"
+                style="@style/AdmEntryDescriptionStyle.NoMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="onResume(): " />
 
             <TextView
-                style="@style/EntryDescriptionStyle.NoMargin"
+                style="@style/AdmEntryDescriptionStyle.NoMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="layout: " />
 
             <TextView
-                style="@style/EntryDescriptionStyle.NoMargin"
+                style="@style/AdmEntryDescriptionStyle.NoMargin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -114,35 +114,35 @@
 
             <TextView
                 android:id="@+id/tvOnCreateTime"
-                style="@style/EntryValueStyle.NoMargin"
+                style="@style/AdmEntryValueStyle.NoMargin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="230ms" />
 
             <TextView
                 android:id="@+id/tvOnStartTime"
-                style="@style/EntryValueStyle.NoMargin"
+                style="@style/AdmEntryValueStyle.NoMargin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="130ms" />
 
             <TextView
                 android:id="@+id/tvOnResumeTime"
-                style="@style/EntryValueStyle.NoMargin"
+                style="@style/AdmEntryValueStyle.NoMargin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="230ms" />
 
             <TextView
                 android:id="@+id/tvOnLayoutTime"
-                style="@style/EntryValueStyle.NoMargin"
+                style="@style/AdmEntryValueStyle.NoMargin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="230ms" />
 
             <TextView
                 android:id="@+id/tvOverallTime"
-                style="@style/EntryValueStyle.NoMargin"
+                style="@style/AdmEntryValueStyle.NoMargin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

@@ -20,6 +20,10 @@ public class Dagger2GraphAnalyzer {
         Dagger2GraphAnalyzer.enabled = enabled;
     }
 
+    public static boolean isEnabled() {
+        return enabled;
+    }
+
     @Pointcut("within(@dagger.Module *)")
     public void withinAnnotatedClass() {
     }

@@ -64,11 +64,11 @@ public class MetricDescription extends MetricDescriptionTreeItem {
     }
 
     private int getWarningLevel(long initTimeWithoutArgs) {
-        if (initTimeWithoutArgs < AndroidDevMetrics.singleton().warningLevel1()) {
+        if (initTimeWithoutArgs < AndroidDevMetrics.singleton().dagger2WarningLevel1()) {
             return 0;
-        } else if (initTimeWithoutArgs < AndroidDevMetrics.singleton().warningLevel2()) {
+        } else if (initTimeWithoutArgs < AndroidDevMetrics.singleton().dagger2WarningLevel2()) {
             return 1;
-        } else if (initTimeWithoutArgs < AndroidDevMetrics.singleton().warningLevel3()) {
+        } else if (initTimeWithoutArgs < AndroidDevMetrics.singleton().dagger2WarningLevel3()) {
             return 2;
         } else {
             return 3;

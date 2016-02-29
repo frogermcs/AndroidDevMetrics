@@ -21,6 +21,10 @@ public class ActivityLifecycleAnalyzer {
         ActivityLifecycleAnalyzer.enabled = enabled;
     }
 
+    public static boolean isEnabled() {
+        return enabled;
+    }
+
     private static final String METHOD_ON_CREATE = "onCreate";
     private static final String METHOD_ON_START = "onStart";
     private static final String METHOD_ON_RESUME = "onResume";

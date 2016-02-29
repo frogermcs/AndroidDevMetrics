@@ -37,7 +37,7 @@
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="Activities"
-                android:textColor="@color/tab_font_color" />
+                android:textColor="@color/adm_tab_font_color" />
 
             <Button
                 android:id="@+id/btnDagger2"
@@ -46,7 +46,7 @@
                 android:layout_weight="1"
                 android:background="#00000000"
                 android:text="Dagger 2"
-                android:textColor="@color/tab_font_color" />
+                android:textColor="@color/adm_tab_font_color" />
         </LinearLayout>
 
     </LinearLayout>
