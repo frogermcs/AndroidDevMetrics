@@ -19,9 +19,12 @@ import com.frogermcs.androiddevmetrics.internal.ui.MetricsActivity;
  * Created by Miroslaw Stanek on 25.01.2016.
  */
 public class AndroidDevMetrics {
-    private static int WARNING_1_LIMIT_MILLIS = 30;
-    private static int WARNING_2_LIMIT_MILLIS = 50;
-    private static int WARNING_3_LIMIT_MILLIS = 100;
+    private static int DAGGER2_WARNING_1_LIMIT_MILLIS = 30;
+    private static int DAGGER2_WARNING_2_LIMIT_MILLIS = 50;
+    private static int DAGGER2_WARNING_3_LIMIT_MILLIS = 100;
+
+    private static int FRAME_DROPS_DEFAULT_INTERVAL_MS = 500;
+    private static double FRAME_DROPS_FPS_LIMIT = 40;
 
     static volatile AndroidDevMetrics singleton;
 
@@ -30,6 +33,8 @@ public class AndroidDevMetrics {
     private boolean enableAcitivtyMetrics;
     private boolean showNotification;
     private boolean enableDagger2Metrics;
+    private int intervalMillis;
+    private double maxFpsForFrameDrop;
 
     /**
      * Enable Activity and Dagger 2 metrics
@@ -95,6 +100,8 @@ public class AndroidDevMetrics {
         if (enableAcitivtyMetrics) {
             ActivityLaunchMetrics activityLaunchMetrics = ActivityLaunchMetrics.getInstance();
             ((Application) context.getApplicationContext()).registerActivityLifecycleCallbacks(activityLaunchMetrics);
+            ChoreographerMetrics.getInstance().setMaxFpsForFrameDrop(maxFpsForFrameDrop);
+            ChoreographerMetrics.getInstance().setIntervalMillis(intervalMillis);
             ChoreographerMetrics.getInstance().start();
         }
 
@@ -119,12 +126,14 @@ public class AndroidDevMetrics {
 
     public static class Builder {
         private final Context context;
-        private int dagger2WarningLevel1 = WARNING_1_LIMIT_MILLIS;
-        private int dagger2WarningLevel2 = WARNING_2_LIMIT_MILLIS;
-        private int dagger2WarningLevel3 = WARNING_3_LIMIT_MILLIS;
-        private boolean enableAcitivtyMetrics = false;
-        private boolean showNotification = true;
+        private int dagger2WarningLevel1 = DAGGER2_WARNING_1_LIMIT_MILLIS;
+        private int dagger2WarningLevel2 = DAGGER2_WARNING_2_LIMIT_MILLIS;
+        private int dagger2WarningLevel3 = DAGGER2_WARNING_3_LIMIT_MILLIS;
+        private boolean enableAcitivtyMetrics = true;
         private boolean enableDagger2Metrics = true;
+        private boolean showNotification = true;
+        private int intervalMillis = FRAME_DROPS_DEFAULT_INTERVAL_MS;
+        private double maxFpsForFrameDrop = FRAME_DROPS_FPS_LIMIT;
 
         public Builder(Context context) {
             if (context == null) {
@@ -146,6 +155,16 @@ public class AndroidDevMetrics {
             return this;
         }
 
+        public Builder frameDropsLimits(int measureIntervalMillis, double maxFpsForFrameDrop) {
+            if (maxFpsForFrameDrop > 60) {
+                throw new IllegalArgumentException("Max fps cannot be bigger than 60fps");
+            }
+
+            this.intervalMillis = measureIntervalMillis;
+            this.maxFpsForFrameDrop = maxFpsForFrameDrop;
+            return this;
+        }
+
         public Builder enableActivityMetrics(boolean enable) {
             this.enableAcitivtyMetrics = enable;
             return this;
@@ -161,7 +180,7 @@ public class AndroidDevMetrics {
             return this;
         }
 
-        private AndroidDevMetrics build() {
+        public AndroidDevMetrics build() {
             AndroidDevMetrics androidDevMetrics = new AndroidDevMetrics(context);
             androidDevMetrics.dagger2WarningLevel1 = this.dagger2WarningLevel1;
             androidDevMetrics.dagger2WarningLevel2 = this.dagger2WarningLevel2;
@@ -169,6 +188,8 @@ public class AndroidDevMetrics {
             androidDevMetrics.enableAcitivtyMetrics = this.enableAcitivtyMetrics;
             androidDevMetrics.showNotification = this.showNotification;
             androidDevMetrics.enableDagger2Metrics = this.enableDagger2Metrics;
+            androidDevMetrics.maxFpsForFrameDrop = this.maxFpsForFrameDrop;
+            androidDevMetrics.intervalMillis = this.intervalMillis;
             return androidDevMetrics;
         }
     }

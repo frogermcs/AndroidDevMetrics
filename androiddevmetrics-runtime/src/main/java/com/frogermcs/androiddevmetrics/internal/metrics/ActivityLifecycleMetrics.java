@@ -10,7 +10,6 @@ import com.frogermcs.androiddevmetrics.internal.metrics.model.FpsDropMetric;
 import com.frogermcs.androiddevmetrics.internal.ui.MetricsActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -165,6 +164,7 @@ public class ActivityLifecycleMetrics {
             }
         }
 
+        ChoreographerMetrics.getInstance().collectDropsIfAny();
         for (FpsDropMetric fpsDropMetric : ChoreographerMetrics.getInstance().dropMetricsList) {
             ActivityMetricDescription activityMetricDescription = activityMetricDescriptions.get(fpsDropMetric.activityName);
             if (activityMetricDescription != null) {

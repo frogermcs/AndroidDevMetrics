@@ -34,11 +34,10 @@ public class ChoreographerMetrics {
     private long frameStartTime = 0;
     private int framesRendered = 0;
 
-    private int interval = 500;
+    private int intervalMillis;
+    private double maxFpsForFrameDrop;
 
-    private double dropLimit = 40;
-    private int dropIntervalMillis = 1000 * 60;
-
+    private int dropIntervalMillis = 1000 * 10;
     private long firstDropRegistered = 0;
 
     private List<Double> tempDrops = new LinkedList<>();
@@ -67,15 +66,11 @@ public class ChoreographerMetrics {
     }
 
     public void setIntervalMillis(int interval) {
-        this.interval = interval;
+        this.intervalMillis = interval;
     }
 
-    public void setDropLimitFps(double dropLimit) {
-        this.dropLimit = dropLimit;
-    }
-
-    public void setDropIntervalMillis(int dropsInterval) {
-        this.dropIntervalMillis = dropsInterval;
+    public void setMaxFpsForFrameDrop(double fps) {
+        this.maxFpsForFrameDrop = fps;
     }
 
     private void onDropRegistered(double fps, long registeredTime) {
@@ -88,13 +83,13 @@ public class ChoreographerMetrics {
 
         long dropTimeSpan = registeredTime - firstDropRegistered;
         if (dropTimeSpan > dropIntervalMillis || !activityName.equals(currentActivityName)) {
-            pushDropsIfExists();
+            collectDropsIfAny();
             currentActivityName = activityName;
         }
 
     }
 
-    private void pushDropsIfExists() {
+    public void collectDropsIfAny() {
         if (tempDrops.size() > 0) {
             FpsDropMetric dropMetric = FpsDropMetric.fromDrops(tempDrops, currentActivityName);
             firstDropRegistered = 0;
@@ -128,11 +123,11 @@ public class ChoreographerMetrics {
                 final long timeSpan = currentTimeMillis - frameStartTime;
                 framesRendered++;
 
-                if (timeSpan > interval) {
+                if (timeSpan > intervalMillis) {
                     double fps = framesRendered * 1000 / (double) timeSpan;
                     frameStartTime = currentTimeMillis;
                     framesRendered = 0;
-                    if (fps < dropLimit) {
+                    if (fps < maxFpsForFrameDrop) {
                         onDropRegistered(fps, currentTimeMillis);
                     }
                 }
@@ -140,7 +135,7 @@ public class ChoreographerMetrics {
                 if (firstDropRegistered > 0) {
                     long dropIntervalTimeSpan = currentTimeMillis - firstDropRegistered;
                     if (dropIntervalTimeSpan > dropIntervalMillis) {
-                        pushDropsIfExists();
+                        collectDropsIfAny();
                     }
                 }
             } else {

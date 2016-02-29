@@ -27,7 +27,7 @@ public class FpsDropMetric {
 
         FpsDropMetric fpsDropMetric = new FpsDropMetric();
         fpsDropMetric.averageFps = averageFps;
-        fpsDropMetric.dropsCount = 1;
+        fpsDropMetric.dropsCount = drops.size();
         fpsDropMetric.activityName = currentActivityName;
         return fpsDropMetric;
     }

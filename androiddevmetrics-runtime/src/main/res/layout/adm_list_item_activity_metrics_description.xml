@@ -27,7 +27,7 @@
                 style="@style/AdmEntryDescriptionStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Frame drops (count/avg fps):" />
+                android:text="Fps drops (count/avg fps for drops):" />
         </LinearLayout>
 
         <LinearLayout
