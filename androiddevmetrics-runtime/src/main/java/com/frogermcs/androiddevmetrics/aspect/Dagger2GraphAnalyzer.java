@@ -1,5 +1,7 @@
 package com.frogermcs.androiddevmetrics.aspect;
 
+import android.util.Log;
+
 import com.frogermcs.androiddevmetrics.internal.metrics.InitManager;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -49,12 +51,15 @@ public class Dagger2GraphAnalyzer {
 
         CodeSignature codeSignature = (CodeSignature) joinPoint.getSignature();
         Class<?> cls = codeSignature.getDeclaringType();
+
         if (codeSignature instanceof ConstructorSignature) {
             InitManager.getInstance().addInitMetric(cls, joinPoint.getArgs(), took);
         }
 
         if (isMethodWithReturnType(codeSignature)) {
-            InitManager.getInstance().addInitMetric(result.getClass(), joinPoint.getArgs(), took);
+            if (result != null) {
+                InitManager.getInstance().addInitMetric(result.getClass(), joinPoint.getArgs(), took);
+            }
         }
 
         return result;

@@ -9,7 +9,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.compile.JavaCompile
 
-class AndroidDevMetricsPlugin implements Plugin<Project> {
+public class AndroidDevMetricsPlugin implements Plugin<Project> {
   @Override void apply(Project project) {
     def hasApp = project.plugins.withType(AppPlugin)
     def hasLib = project.plugins.withType(LibraryPlugin)
@@ -26,7 +26,7 @@ class AndroidDevMetricsPlugin implements Plugin<Project> {
     }
 
     project.dependencies {
-      debugCompile 'com.frogermcs.androiddevmetrics:androiddevmetrics-runtime:0.2.1'
+      debugCompile 'com.frogermcs.androiddevmetrics:androiddevmetrics-runtime:0.3'
       debugCompile 'org.aspectj:aspectjrt:1.8.8'
       compile 'com.android.support:support-v4:23.1.1'
     }

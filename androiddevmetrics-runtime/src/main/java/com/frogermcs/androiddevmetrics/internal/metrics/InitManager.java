@@ -38,6 +38,7 @@ public class InitManager {
             putInitMetric(simpleName, initMetric);
             int argsLength = args.length;
             for (int i = 0; i < argsLength; i++) {
+                if (args[i] == null) continue;
                 String argClassSimpleName = args[i].getClass().getSimpleName();
                 InitMetric argMethics = initializedMetrics.get(argClassSimpleName);
                 if (argMethics != null) {
