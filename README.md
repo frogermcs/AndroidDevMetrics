@@ -1,47 +1,90 @@
 # AndroidDevMetrics
 (formerly dagger2metrics)
 
-Performance metrics library for Android development. Currently includes:
-
-* Activity lifecycle metrics
-* Dagger 2 metrics
-
-
-### Activity lifecycle metrics
-
-**to be updated**
-
-### Dagger 2 metrics
-
-If you use Dagger 2 for dependency injection in your Android app you probably know that it's super optimized and non-reflection piece of code served by great engineers from Google (and formerly from Square). 
-
-Even with all those optimizations and fully generated non-dynamic code, still there are potential performance issues hidden in our code and all 3rd parties injected via Dagger 2. 
+Performance metrics library for Android development. 
 
 The problem with performance is that it often decreases slowly so in day-by-day development it's hard to notice that our app (or Activity or any other view) launches 50ms longer. And another 150ms longer, and another 100ms...
 
-With **AndroidDevMetrics** you will be able to see how much time was needed to initialize all requested dependencies (and dependencies of those dependencies).
+With **AndroidDevMetrics** you will be able to see how performant are the most common operations like object initialization (in Dagger 2 graph), or Activity lifecycle methods (`onCreate()`, `onStart()`, `onResume()`).
 
-![screenshot.png](https://raw.githubusercontent.com/frogermcs/dagger2metrics/master/art/dagger2metrics.png)
+It won't show you exact reason of performance issues or bottlenecks (yet!) but it can point out where you should start looking first. 
+
+AndroidDevMetrics currently includes:
+
+* Activity lifecycle metrics - metrics for lifecycle methods execution (`onCreate()`, `onStart()`, `onResume()`)
+* Frame rate drops - metrics for fps drops for each of screens (activity)
+* Dagger 2 metrics - metrics for objects initialization in Dagger 2 
+
+![screenshot1.png](https://raw.githubusercontent.com/frogermcs/androiddevmetrics/master/art/activities_metrics.png)
+
+![screenshot.png](https://raw.githubusercontent.com/frogermcs/androiddevmetrics/master/art/dagger2_metrics.png)
 
 ## Getting started
 
-**to be updated**
+Script below shows how to enable all available metrics.
+
+In your `build.gradle`:
+
+```gradle
+ buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.3'
+  }
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.frogermcs.androiddevmetrics'
+```
+
+In your `Application` class:
+
+```java
+public class ExampleApplication extends Application {
+
+ @Override
+ public void onCreate() {
+     super.onCreate();
+     //Use it only in debug builds
+     if (BuildConfig.DEBUG) {
+         AndroidDevMetrics.initWith(this);
+     }
+  }
+ }
+```
 
 ## How does it work?
 
-Dagger2Metrics captures all initializations from both - `@Module` -> `@Provides` annotated methods and `@Inject` annotated constructors.
+Detailed description how it works under the hood can be found on wiki pages:
 
-In summary you will see the most-top injected dependencies with trees of their dependencies. Each of dependency shows how much time was needed to provide this object to Dagger 2 object graph (construction time itself and overall time with all dependencies).
+* [Activity lifecycle and frame drops metrics](https://github.com/frogermcs/AndroidDevMetrics/wiki/Activity-lifecycle-metrics)
+* [Dagger 2 metrics](https://github.com/frogermcs/AndroidDevMetrics/wiki/Dagger-2-metrics)
 
-![screenshot.png](https://raw.githubusercontent.com/frogermcs/dagger2metrics/master/art/dagger2metrics.png)
+## I found performance issue, what should I do next?
 
-### Why I don't see all (sub) dependencies?
-Metric trees don't show dependencies which are already provided to Dagger's graph, so only those constructed from scratch will be visible. Mainly because of readability and from a simple reason - we don't want to measure Dagger 2 performance which in most cases won't be an issue.  
-Instead we should be sure that our code provides requested dependencies as fast as it's possible.
+There is no silver bullet for performance issues but here are a couple steps which can help you with potential bugs hunting.
+
+If measured time of object initialization or method execution looks suspicious you should definitely give a try to [TraceView](http://developer.android.com/tools/debugging/debugging-tracing.html). This tool logs method execution over time and shows execution data, per-thread timelines, and call stacks. Practical example of TraceView usage can be found in this blog post: [Measuring Dagger 2 graph creation performance](http://frogermcs.github.io/dagger-graph-creation-performance/]).
+
+---
+
+If it seems that layout or view can be a reason of performance issue you should start with those links from official Android documentation:
+
+* http://developer.android.com/training/improving-layouts/index.html
+* http://developer.android.com/training/improving-layouts/optimizing-layout.html
+
+--- 
+
+Finally, if you want to understand where most of performance issues come from, here *is a collection of videos focused entirely on helping developers write faster, more performant Android Applications.*
+
+* [Android Performance Patterns](https://www.youtube.com/playlist?list=PLWz5rJ2EKKc9CBxr3BVjPTPoDPLdPIFCE)
 
 ## Example app
 
-You can check [GithubClient](https://github.com/frogermcs/githubclient) project  - example Android app which shows how to use Dagger 2. Most recent version uses *AndroidDevMetrics* for measuring construction times.
+You can check [GithubClient](https://github.com/frogermcs/githubclient) - example Android app which shows how to use Dagger 2. Most recent version uses **AndroidDevMetrics** for measuring performance.
 
 ## License
 
