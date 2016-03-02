@@ -4,6 +4,9 @@ buildscript {
         maven {
             url 'https://dl.bintray.com/frogermcs/maven/'
         }
+
+        // for local snapshots
+        mavenLocal()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.0.0-beta5'
@@ -22,6 +25,9 @@ allprojects {
         maven {
             url 'https://dl.bintray.com/frogermcs/maven/'
         }
+
+        // for local snapshots
+        mavenLocal()
     }
 }
 
