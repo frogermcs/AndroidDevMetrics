@@ -55,12 +55,13 @@ extraArchive {
 }
 
 // Bintray
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
+    // Global gradle.properties
+    user = hasProperty('BINTRAY_USER') ? getProperty('BINTRAY_USER') : ""
+    key = hasProperty('BINTRAY_KEY') ? getProperty('BINTRAY_KEY') : ""
+
+    println "user: " + user
+    println "key: " + key
 
     configurations = ['archives']
     pkg {
@@ -76,7 +77,7 @@ bintray {
             desc = POM_DESCRIPTION
             gpg {
                 sign = true
-                passphrase = properties.getProperty("bintray.gpg.password")
+                passphrase = hasProperty('BINTRAY_GPG_PASSWORD') ? getProperty('BINTRAY_GPG_PASSWORD') : ""
             }
         }
     }
