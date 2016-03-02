@@ -60,9 +60,6 @@ bintray {
     user = hasProperty('BINTRAY_USER') ? getProperty('BINTRAY_USER') : ""
     key = hasProperty('BINTRAY_KEY') ? getProperty('BINTRAY_KEY') : ""
 
-    println "user: " + user
-    println "key: " + key
-
     configurations = ['archives']
     pkg {
         repo = 'maven'
