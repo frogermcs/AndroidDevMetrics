@@ -21,7 +21,7 @@ public class MetricDescription extends MetricDescriptionTreeItem {
 
     public static MetricDescription InitFromMetric(InitMetric initMetric) {
         MetricDescription metricDescription = new MetricDescription();
-        metricDescription.className = initMetric.getClassName();
+        metricDescription.className = initMetric.getSimpleClassName();
         metricDescription.formatInitTime(initMetric.getTotalInitTime(), initMetric.getInitTimeWithoutArgs());
         metricDescription.initDescriptionsTree(initMetric.args, 0);
         return metricDescription;
@@ -50,7 +50,7 @@ public class MetricDescription extends MetricDescriptionTreeItem {
             String depthStr = new String(new char[depthLevel]).replace("\0", "\t\t");
             StringBuilder sb = new StringBuilder(depthStr);
             sb.append("|__<b>");
-            sb.append(initMetric.getClassName());
+            sb.append(initMetric.getSimpleClassName());
             sb.append("</b>: ");
             sb.append(initTimeWithoutArgs);
             sb.append("ms, with args: ");
