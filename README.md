@@ -3,6 +3,8 @@
 
 Performance metrics library for Android development. 
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-AndroidDevMetrics-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/3120)
+
 The problem with performance is that it often decreases slowly so in day-by-day development it's hard to notice that our app (or Activity or any other view) launches 50ms longer. And another 150ms longer, and another 100ms...
 
 With **AndroidDevMetrics** you will be able to see how performant are the most common operations like object initialization (in Dagger 2 graph), or Activity lifecycle methods (`onCreate()`, `onStart()`, `onResume()`).
