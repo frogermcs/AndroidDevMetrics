@@ -33,13 +33,13 @@ public class InitManager {
         initMetric.initTimeMillis = initTimeMillis;
         initMetric.cls = initializedClass;
 
-        String simpleName = initializedClass.getSimpleName();
+        String simpleName = initializedClass.getName();
         if (!initializedMetrics.containsKey(simpleName)) {
             putInitMetric(simpleName, initMetric);
             int argsLength = args.length;
             for (int i = 0; i < argsLength; i++) {
                 if (args[i] == null) continue;
-                String argClassSimpleName = args[i].getClass().getSimpleName();
+                String argClassSimpleName = args[i].getClass().getName();
                 InitMetric argMethics = initializedMetrics.get(argClassSimpleName);
                 if (argMethics != null) {
                     initMetric.args.add(argMethics);

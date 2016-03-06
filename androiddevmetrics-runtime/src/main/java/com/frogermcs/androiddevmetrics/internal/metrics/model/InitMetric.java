@@ -27,17 +27,22 @@ public class InitMetric {
         return initTimeMillis;
     }
 
-    public String getClassName() {
+    public String getSimpleClassName() {
         String className;
         if (Proxy.isProxyClass(cls)) {
             final Class<?>[] interfaces = cls.getInterfaces();
             if (interfaces.length == 1) {
-                className = interfaces[0].getSimpleName();
+                className = interfaces[0].getName();
             } else {
                 className = Arrays.asList(interfaces).toString();
             }
         } else {
-            className = cls.getSimpleName();
+            className = cls.getName();
+        }
+
+        int dot = className.lastIndexOf('.');
+        if (dot != -1) {
+             className = className.substring(dot + 1);
         }
 
         if (instanceNo > 0) {
@@ -57,7 +62,7 @@ public class InitMetric {
         } else {
             return "InitMetric{" +
                     "initTimeMillis=" + initTimeMillis +
-                    ", cls=" + cls.getSimpleName() +
+                    ", cls=" + cls.getName() +
                     ", args=" + args +
                     '}';
         }
