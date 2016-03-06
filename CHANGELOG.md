@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 0.3.1 *(2015-03-06)*
+----------------------------
+
+* Update: Use Class.getName() instead of Class.getSimpleName() because of performance issues in anonymous classes
+* Update: Don't measure Dagger 2 Producers monitor injections
+* Update: Gradle config cleanup, added no-op lib version for release build variant
+
 Version 0.3 *(2015-03-01)*
 ----------------------------
 
