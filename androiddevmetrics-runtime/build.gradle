@@ -130,8 +130,8 @@ install {
 // Bintray
 bintray {
     // Global gradle.properties
-    user = hasProperty('BINTRAY_USER') ? getProperty('BINTRAY_USER') : ""
-    key = hasProperty('BINTRAY_KEY') ? getProperty('BINTRAY_KEY') : ""
+    user = project.hasProperty('BINTRAY_USER') ? project.getProperty('BINTRAY_USER') : ""
+    key = project.hasProperty('BINTRAY_KEY') ? project.getProperty('BINTRAY_KEY') : ""
 
     configurations = ['archives']
     pkg {
@@ -147,7 +147,7 @@ bintray {
             desc = POM_DESCRIPTION
             gpg {
                 sign = true
-                passphrase = hasProperty('BINTRAY_GPG_PASSWORD') ? getProperty('BINTRAY_GPG_PASSWORD') : ""
+                passphrase = project.hasProperty('BINTRAY_GPG_PASSWORD') ? project.getProperty('BINTRAY_GPG_PASSWORD') : ""
             }
         }
     }

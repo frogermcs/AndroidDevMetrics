@@ -124,12 +124,9 @@ install {
 }
 
 // Bintray
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
 bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
+    user = project.hasProperty('BINTRAY_USER') ? project.getProperty('BINTRAY_USER') : ""
+    key = project.hasProperty('BINTRAY_KEY') ? project.getProperty('BINTRAY_KEY') : ""
 
     configurations = ['archives']
     pkg {
@@ -145,7 +142,7 @@ bintray {
             desc = POM_DESCRIPTION
             gpg {
                 sign = true
-                passphrase = properties.getProperty("bintray.gpg.password")
+                passphrase = project.hasProperty('BINTRAY_GPG_PASSWORD') ? project.getProperty('BINTRAY_GPG_PASSWORD') : ""
             }
         }
     }
