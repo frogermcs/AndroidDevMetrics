@@ -1,7 +1,5 @@
 package com.frogermcs.androiddevmetrics.aspect;
 
-import android.util.Log;
-
 import com.frogermcs.androiddevmetrics.internal.metrics.InitManager;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -34,7 +32,19 @@ public class Dagger2GraphAnalyzer {
     public void injectConstructor() {
     }
 
-    @Pointcut("execution(@dagger.Provides * *(..)) && withinAnnotatedClass()")
+    //Exclude methods from *_MonitoringModule (Dagger 2 producers)
+    @Pointcut("!execution(* defaultSetOfFactories())")
+    public void exceprDefaultSetOfFactories() {
+    }
+
+    @Pointcut("!execution(dagger.producers.monitoring.ProductionComponentMonitor *(..))")
+    public void exceptProductionComponentMonitor() {
+    }
+
+    @Pointcut("execution(@dagger.Provides * *(..)) &&" +
+            " withinAnnotatedClass() &&" +
+            " exceptProductionComponentMonitor()" +
+            " && exceprDefaultSetOfFactories()")
     public void providesMethod() {
     }
 
