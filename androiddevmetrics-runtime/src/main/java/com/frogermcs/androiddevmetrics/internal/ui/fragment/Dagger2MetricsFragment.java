@@ -1,4 +1,4 @@
-package com.frogermcs.androiddevmetrics.internal.ui;
+package com.frogermcs.androiddevmetrics.internal.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.frogermcs.androiddevmetrics.R;
 import com.frogermcs.androiddevmetrics.aspect.Dagger2GraphAnalyzer;
 import com.frogermcs.androiddevmetrics.internal.metrics.InitManager;
+import com.frogermcs.androiddevmetrics.internal.ui.ExpandableMetricsListAdapter;
 
 /**
  * Created by Miroslaw Stanek on 25.01.2016.

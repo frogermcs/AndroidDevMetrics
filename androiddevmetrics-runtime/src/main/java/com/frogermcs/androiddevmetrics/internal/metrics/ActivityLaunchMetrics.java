@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
 
+import com.frogermcs.androiddevmetrics.internal.MethodsTracingManager;
+import com.frogermcs.androiddevmetrics.internal.ui.dialog.MethodsTracingFinishedDialog;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,8 +26,10 @@ public class ActivityLaunchMetrics implements Application.ActivityLifecycleCallb
     public final Set<OnMetricsDataListener> dataListeners = new HashSet<>();
 
     private String currentActivityName = "not_set";
+    private MethodsTracingManager methodsTracingManager;
 
     ActivityLaunchMetrics() {
+        methodsTracingManager = MethodsTracingManager.getInstance();
     }
 
     @Override
@@ -41,6 +46,12 @@ public class ActivityLaunchMetrics implements Application.ActivityLifecycleCallb
     @Override
     public void onActivityResumed(Activity activity) {
         ActivityLifecycleMetrics.getInstance().logPostOnResume(activity);
+        final String[] tracedMethods = methodsTracingManager.getTracedMethods();
+        if (tracedMethods != null) {
+            MethodsTracingFinishedDialog dialog = MethodsTracingFinishedDialog.newInstance(tracedMethods);
+            dialog.show(activity.getFragmentManager(), MethodsTracingFinishedDialog.TAG);
+            methodsTracingManager.clearTracedMethods();
+        }
     }
 
     @Override

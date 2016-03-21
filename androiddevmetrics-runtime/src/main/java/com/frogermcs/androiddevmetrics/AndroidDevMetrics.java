@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.frogermcs.androiddevmetrics.aspect.ActivityLifecycleAnalyzer;
+import com.frogermcs.androiddevmetrics.internal.MethodsTracingManager;
 import com.frogermcs.androiddevmetrics.internal.metrics.ActivityLaunchMetrics;
 import com.frogermcs.androiddevmetrics.aspect.Dagger2GraphAnalyzer;
 import com.frogermcs.androiddevmetrics.internal.metrics.ChoreographerMetrics;
@@ -96,8 +97,9 @@ public class AndroidDevMetrics {
         Dagger2GraphAnalyzer.setEnabled(enableDagger2Metrics);
         InitManager.getInstance().initializedMetrics.clear();
 
-        ActivityLifecycleAnalyzer.setEnabled(enableAcitivtyMetrics);
+        ActivityLifecycleAnalyzer.setEnabled(true);
         if (enableAcitivtyMetrics) {
+            MethodsTracingManager.getInstance().init(context);
             ActivityLaunchMetrics activityLaunchMetrics = ActivityLaunchMetrics.getInstance();
             ((Application) context.getApplicationContext()).registerActivityLifecycleCallbacks(activityLaunchMetrics);
             ChoreographerMetrics.getInstance().setMaxFpsForFrameDrop(maxFpsForFrameDrop);
@@ -114,7 +116,7 @@ public class AndroidDevMetrics {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
                 .setSmallIcon(R.drawable.ic_timeline_white_18dp)
                 .setContentTitle(context.getString(R.string.adm_name))
-                .setContentText(context.getString(R.string.adm_notification_content))
+                .setContentText("Click to see current metrics")
                 .setAutoCancel(false);
 
         Intent resultIntent = new Intent(context, MetricsActivity.class);

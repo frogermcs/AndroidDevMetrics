@@ -4,10 +4,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.frogermcs.androiddevmetrics.R;
 import com.frogermcs.androiddevmetrics.internal.ActivityMetricDescription;
+import com.frogermcs.androiddevmetrics.internal.ui.fragment.ActivitiesMetricsFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,12 @@ import java.util.List;
 public class ExpandableActivitiesMetricsListAdapter extends BaseExpandableListAdapter {
 
     private final List<ActivityMetricDescription> metricDescriptionList = new ArrayList<>();
+
+    private ActivitiesMetricsFragment activitiesMetricsFragment;
+
+    public ExpandableActivitiesMetricsListAdapter(ActivitiesMetricsFragment activitiesMetricsFragment) {
+        this.activitiesMetricsFragment = activitiesMetricsFragment;
+    }
 
     public void updateMetrics(List<ActivityMetricDescription> metricDescriptions) {
         metricDescriptionList.clear();
@@ -118,7 +126,7 @@ public class ExpandableActivitiesMetricsListAdapter extends BaseExpandableListAd
         }
 
         public void bindView(ActivityMetricDescription activityMetricDescription) {
-            tvActivityName.setText(activityMetricDescription.activityName);
+            tvActivityName.setText(activityMetricDescription.activitySimpleName);
             String frameDrops;
             if (activityMetricDescription.frameDropsCount == 0) {
                 frameDrops = "No frame drops";
@@ -143,6 +151,7 @@ public class ExpandableActivitiesMetricsListAdapter extends BaseExpandableListAd
         TextView tvOverallTime;
         TextView tvInstancesCount;
         TextView tvFrameDrops;
+        Button btnScheduleMethodTracing;
 
         public DescriptionViewHolder(View view) {
             tvInstancesCount = (TextView) view.findViewById(R.id.tvInstancesCount);
@@ -152,6 +161,13 @@ public class ExpandableActivitiesMetricsListAdapter extends BaseExpandableListAd
             tvOnResumeTime = (TextView) view.findViewById(R.id.tvOnResumeTime);
             tvOnLayoutTime = (TextView) view.findViewById(R.id.tvOnLayoutTime);
             tvOverallTime = (TextView) view.findViewById(R.id.tvOverallTime);
+            btnScheduleMethodTracing = (Button) view.findViewById(R.id.btnScheduleMethodTracing);
+            btnScheduleMethodTracing.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    activitiesMetricsFragment.scheduleTracingForActivity(((ActivityMetricDescription)v.getTag()));
+                }
+            });
         }
 
         public void bindView(ActivityMetricDescription activityMetricDescription) {
@@ -166,6 +182,7 @@ public class ExpandableActivitiesMetricsListAdapter extends BaseExpandableListAd
             tvOnStartTime.setText(activityMetricDescription.activityStartMillis + "ms");
             tvOnResumeTime.setText(activityMetricDescription.activityResumeMillis + "ms");
             tvOnLayoutTime.setText(activityMetricDescription.activityLayoutTimeMillis + "ms");
+            btnScheduleMethodTracing.setTag(activityMetricDescription);
         }
     }
 }

@@ -38,6 +38,7 @@ public class ActivityLifecycleMetrics {
         }
 
         activityLifecycleMetric.state = ActivityLifecycleMetric.STATE_PRE_CREATED;
+        activityLifecycleMetric.hasOnCreateImplemented = true;
     }
 
     public void logPostOnCreate(Activity activity) {
@@ -75,6 +76,7 @@ public class ActivityLifecycleMetrics {
         if (activityLifecycleMetric.state == ActivityLifecycleMetric.STATE_POST_CREATED) {
             activityLifecycleMetric.preStartNanoTime = System.nanoTime();
             activityLifecycleMetric.state = ActivityLifecycleMetric.STATE_PRE_STARTED;
+            activityLifecycleMetric.hasOnStartImplemented = true;
         }
     }
 
@@ -102,6 +104,7 @@ public class ActivityLifecycleMetrics {
         if (activityLifecycleMetric.state == ActivityLifecycleMetric.STATE_POST_STARTED) {
             activityLifecycleMetric.preResumeNanoTime = System.nanoTime();
             activityLifecycleMetric.state = ActivityLifecycleMetric.STATE_PRE_RESUMED;
+            activityLifecycleMetric.hasOnResumeImplemented = true;
         }
     }
 
@@ -198,6 +201,9 @@ public class ActivityLifecycleMetrics {
         public long viewVisibleToUserNanoTime;
         public int state = STATE_NEW;
         public boolean isFirstActivity = false;
+        public boolean hasOnCreateImplemented = false;
+        public boolean hasOnStartImplemented = false;
+        public boolean hasOnResumeImplemented = false;
 
         public long createTimeMillis() {
             if (state > STATE_POST_CREATED) {

@@ -1,7 +1,11 @@
 package com.frogermcs.androiddevmetrics.internal;
 
+import com.frogermcs.androiddevmetrics.aspect.ActivityLifecycleAnalyzer;
 import com.frogermcs.androiddevmetrics.internal.metrics.ActivityLifecycleMetrics;
 import com.frogermcs.androiddevmetrics.internal.metrics.model.FpsDropMetric;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Miroslaw Stanek on 22.02.2016.
@@ -9,6 +13,7 @@ import com.frogermcs.androiddevmetrics.internal.metrics.model.FpsDropMetric;
 public class ActivityMetricDescription {
 
     public String activityName;
+    public String activitySimpleName;
     public int instancesCount;
     public int frameDropsCount;
     public float fpsDropsSum;
@@ -17,10 +22,14 @@ public class ActivityMetricDescription {
     public long activityStartMillis;
     public long activityResumeMillis;
     public boolean isLauncherActivity;
+    public boolean hasOnCreateImplemented;
+    public boolean hasOnStartImplemented;
+    public boolean hasOnResumeImplemented;
 
     public static ActivityMetricDescription initFrom(ActivityLifecycleMetrics.ActivityLifecycleMetric activityMetrics) {
         ActivityMetricDescription activityMetricDescription = new ActivityMetricDescription();
-        activityMetricDescription.activityName = activityMetrics.activityClass.getSimpleName();
+        activityMetricDescription.activityName = activityMetrics.activityClass.getName();
+        activityMetricDescription.activitySimpleName = activityMetrics.activityClass.getSimpleName();
         activityMetricDescription.instancesCount = 1;
         activityMetricDescription.frameDropsCount = 0;
         activityMetricDescription.fpsDropsSum = 0;
@@ -29,6 +38,9 @@ public class ActivityMetricDescription {
         activityMetricDescription.activityCreateMillis = activityMetrics.createTimeMillis();
         activityMetricDescription.activityStartMillis = activityMetrics.startTimeMillis();
         activityMetricDescription.activityResumeMillis = activityMetrics.resumeTimeMillis();
+        activityMetricDescription.hasOnCreateImplemented = activityMetrics.hasOnCreateImplemented;
+        activityMetricDescription.hasOnStartImplemented = activityMetrics.hasOnStartImplemented;
+        activityMetricDescription.hasOnResumeImplemented = activityMetrics.hasOnResumeImplemented;
         return activityMetricDescription;
     }
 
@@ -51,5 +63,16 @@ public class ActivityMetricDescription {
 
     public float getAverageFps() {
         return fpsDropsSum / frameDropsCount;
+    }
+
+    public String[] getImplementedMethods() {
+        List<String> implementedMethods = new ArrayList<>();
+        if (hasOnCreateImplemented) implementedMethods.add(ActivityLifecycleAnalyzer.METHOD_ON_CREATE);
+        if (hasOnStartImplemented) implementedMethods.add(ActivityLifecycleAnalyzer.METHOD_ON_START);
+        if (hasOnResumeImplemented) implementedMethods.add(ActivityLifecycleAnalyzer.METHOD_ON_RESUME);
+
+        String[] implementedMethodsArray = new String[implementedMethods.size()];
+        implementedMethods.toArray(implementedMethodsArray);
+        return implementedMethodsArray;
     }
 }

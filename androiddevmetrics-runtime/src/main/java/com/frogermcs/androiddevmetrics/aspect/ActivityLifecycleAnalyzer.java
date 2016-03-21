@@ -1,7 +1,11 @@
 package com.frogermcs.androiddevmetrics.aspect;
 
 import android.app.Activity;
+import android.os.Debug;
+import android.os.Environment;
+import android.support.v4.app.FragmentActivity;
 
+import com.frogermcs.androiddevmetrics.internal.MethodsTracingManager;
 import com.frogermcs.androiddevmetrics.internal.metrics.ActivityLifecycleMetrics;
 
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -25,9 +29,9 @@ public class ActivityLifecycleAnalyzer {
         return enabled;
     }
 
-    private static final String METHOD_ON_CREATE = "onCreate";
-    private static final String METHOD_ON_START = "onStart";
-    private static final String METHOD_ON_RESUME = "onResume";
+    public static final String METHOD_ON_CREATE = "onCreate";
+    public static final String METHOD_ON_START = "onStart";
+    public static final String METHOD_ON_RESUME = "onResume";
 
     @Pointcut("execution(void *.onCreate(..)) && this(android.app.Activity+)")
     public void onCreateMethod() {
@@ -51,21 +55,38 @@ public class ActivityLifecycleAnalyzer {
         final Object result;
         if (METHOD_ON_RESUME.equals(methodName)) {
             ActivityLifecycleMetrics.getInstance().logPreOnResume((Activity) joinPoint.getTarget());
-            result = joinPoint.proceed();
+            result = executeWithTracingIfEnabled(joinPoint, methodName);
             ActivityLifecycleMetrics.getInstance().logPostOnResume((Activity) joinPoint.getTarget());
         } else if (METHOD_ON_START.equals(methodName)) {
             ActivityLifecycleMetrics.getInstance().logPreOnStart((Activity) joinPoint.getTarget());
-            result = joinPoint.proceed();
+            result = executeWithTracingIfEnabled(joinPoint, methodName);
             ActivityLifecycleMetrics.getInstance().logPostOnStart((Activity) joinPoint.getTarget());
         } else if (METHOD_ON_CREATE.equals(methodName)) {
             ActivityLifecycleMetrics.getInstance().logPreOnCreate((Activity) joinPoint.getTarget());
-            result = joinPoint.proceed();
+            result = executeWithTracingIfEnabled(joinPoint, methodName);
             ActivityLifecycleMetrics.getInstance().logPostOnCreate((Activity) joinPoint.getTarget());
         } else {
             result = null;
         }
 
         return result;
+    }
+
+    private Object executeWithTracingIfEnabled(ProceedingJoinPoint joinPoint, String methodName) throws Throwable {
+        final String targetName = joinPoint.getTarget().getClass().getName();
+        if (MethodsTracingManager.getInstance().shouldTraceMethod(targetName, methodName)) {
+            MethodsTracingManager.getInstance().disableMethodTracing(targetName, methodName);
+            String traceName = "/sdcard/" + joinPoint.getTarget().getClass().getSimpleName() + methodName + ".trace";
+
+            Debug.startMethodTracing(traceName);
+            Object result = joinPoint.proceed();
+            Debug.stopMethodTracing();
+
+            MethodsTracingManager.getInstance().addTracedMethod(traceName);
+            return result;
+        } else {
+            return joinPoint.proceed();
+        }
     }
 
 }
