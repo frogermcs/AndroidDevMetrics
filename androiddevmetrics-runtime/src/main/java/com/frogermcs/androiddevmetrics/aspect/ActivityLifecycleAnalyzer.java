@@ -77,12 +77,12 @@ public class ActivityLifecycleAnalyzer {
         if (MethodsTracingManager.getInstance().shouldTraceMethod(targetName, methodName)) {
             MethodsTracingManager.getInstance().disableMethodTracing(targetName, methodName);
             String traceName = "/sdcard/" + joinPoint.getTarget().getClass().getSimpleName() + methodName + ".trace";
+            MethodsTracingManager.getInstance().addTracedMethod(traceName);
 
             Debug.startMethodTracing(traceName);
             Object result = joinPoint.proceed();
             Debug.stopMethodTracing();
 
-            MethodsTracingManager.getInstance().addTracedMethod(traceName);
             return result;
         } else {
             return joinPoint.proceed();
