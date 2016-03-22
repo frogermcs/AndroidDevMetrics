@@ -14,6 +14,7 @@ It won't show you exact reason of performance issues or bottlenecks (yet!) but i
 AndroidDevMetrics currently includes:
 
 * Activity lifecycle metrics - metrics for lifecycle methods execution (`onCreate()`, `onStart()`, `onResume()`)
+* Activity lifecycle methods tracing without app recompiling
 * Frame rate drops - metrics for fps drops for each of screens (activity)
 * Dagger 2 metrics - metrics for objects initialization in Dagger 2 
 
@@ -34,7 +35,7 @@ In your `build.gradle`:
   }
 
   dependencies {
-    classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.3.1'
+    classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.4'
   }
 }
 
@@ -63,6 +64,7 @@ public class ExampleApplication extends Application {
 Detailed description how it works under the hood can be found on wiki pages:
 
 * [Activity lifecycle and frame drops metrics](https://github.com/frogermcs/AndroidDevMetrics/wiki/Activity-lifecycle-metrics)
+* [Activity lifecycle methods tracing](http://frogermcs.github.io/androiddevmetrics-activity-lifecycle-methods-tracing/)
 * [Dagger 2 metrics](https://github.com/frogermcs/AndroidDevMetrics/wiki/Dagger-2-metrics)
 
 ## I found performance issue, what should I do next?
