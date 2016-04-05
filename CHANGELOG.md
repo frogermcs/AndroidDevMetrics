@@ -2,6 +2,7 @@ Change Log
 ==========
 
 Version 0.4 *(2015-03-21)*
+----------------------------
 
 * New: Activities lifecycle methods tracing
 
