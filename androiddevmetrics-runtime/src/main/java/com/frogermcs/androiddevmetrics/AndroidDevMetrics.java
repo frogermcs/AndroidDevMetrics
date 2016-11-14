@@ -8,9 +8,9 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 
 import com.frogermcs.androiddevmetrics.aspect.ActivityLifecycleAnalyzer;
+import com.frogermcs.androiddevmetrics.aspect.Dagger2GraphAnalyzer;
 import com.frogermcs.androiddevmetrics.internal.MethodsTracingManager;
 import com.frogermcs.androiddevmetrics.internal.metrics.ActivityLaunchMetrics;
-import com.frogermcs.androiddevmetrics.aspect.Dagger2GraphAnalyzer;
 import com.frogermcs.androiddevmetrics.internal.metrics.ChoreographerMetrics;
 import com.frogermcs.androiddevmetrics.internal.metrics.InitManager;
 import com.frogermcs.androiddevmetrics.internal.ui.MetricsActivity;
@@ -33,6 +33,7 @@ public class AndroidDevMetrics {
     private int dagger2WarningLevel1, dagger2WarningLevel2, dagger2WarningLevel3;
     private boolean enableAcitivtyMetrics;
     private boolean showNotification;
+    private boolean autoCancelNotification;
     private boolean enableDagger2Metrics;
     private int intervalMillis;
     private double maxFpsForFrameDrop;
@@ -44,7 +45,8 @@ public class AndroidDevMetrics {
         Builder androidDevMetricsBuilder = new Builder(context)
                 .enableActivityMetrics(true)
                 .enableDagger2Metrics(true)
-                .showNotification(true);
+                .showNotification(true)
+                .autoCancelNotification(false);
         return initWith(androidDevMetricsBuilder);
     }
 
@@ -117,7 +119,7 @@ public class AndroidDevMetrics {
                 .setSmallIcon(R.drawable.ic_timeline_white_18dp)
                 .setContentTitle(context.getString(R.string.adm_name))
                 .setContentText("Click to see current metrics")
-                .setAutoCancel(false);
+                .setAutoCancel(autoCancelNotification);
 
         Intent resultIntent = new Intent(context, MetricsActivity.class);
         PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
@@ -134,6 +136,7 @@ public class AndroidDevMetrics {
         private boolean enableAcitivtyMetrics = true;
         private boolean enableDagger2Metrics = true;
         private boolean showNotification = true;
+        private boolean autoCancelNotification = false;
         private int intervalMillis = FRAME_DROPS_DEFAULT_INTERVAL_MS;
         private double maxFpsForFrameDrop = FRAME_DROPS_FPS_LIMIT;
 
@@ -182,6 +185,11 @@ public class AndroidDevMetrics {
             return this;
         }
 
+        public Builder autoCancelNotification(boolean autoCancelNotification) {
+            this.autoCancelNotification = autoCancelNotification;
+            return this;
+        }
+
         public AndroidDevMetrics build() {
             AndroidDevMetrics androidDevMetrics = new AndroidDevMetrics(context);
             androidDevMetrics.dagger2WarningLevel1 = this.dagger2WarningLevel1;
@@ -192,6 +200,7 @@ public class AndroidDevMetrics {
             androidDevMetrics.enableDagger2Metrics = this.enableDagger2Metrics;
             androidDevMetrics.maxFpsForFrameDrop = this.maxFpsForFrameDrop;
             androidDevMetrics.intervalMillis = this.intervalMillis;
+            androidDevMetrics.autoCancelNotification = this.autoCancelNotification;
             return androidDevMetrics;
         }
     }
