@@ -13,6 +13,7 @@ public class InitMetric {
     public Class<?> cls;
     public long initTimeMillis = 0;
     public int instanceNo = 0;
+    public String threadName = "";
     public Set<InitMetric> args = new HashSet<>();
 
     public long getTotalInitTime() {
@@ -49,6 +50,10 @@ public class InitMetric {
             return className + "#" + Integer.toString(instanceNo);
         }
         return className;
+    }
+
+    public String getThreadName() {
+        return threadName;
     }
 
     @Override

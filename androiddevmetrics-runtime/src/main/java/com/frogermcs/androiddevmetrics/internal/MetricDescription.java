@@ -22,44 +22,61 @@ public class MetricDescription extends MetricDescriptionTreeItem {
     public static MetricDescription InitFromMetric(InitMetric initMetric) {
         MetricDescription metricDescription = new MetricDescription();
         metricDescription.className = initMetric.getSimpleClassName();
-        metricDescription.formatInitTime(initMetric.getTotalInitTime(), initMetric.getInitTimeWithoutArgs());
-        metricDescription.initDescriptionsTree(initMetric.args, 0);
+        metricDescription.formatInitTime(initMetric.getTotalInitTime(),
+                initMetric.getInitTimeWithoutArgs(),
+                initMetric.getThreadName());
+        metricDescription.initDescriptionsTree(initMetric.args, 0, "");
         return metricDescription;
     }
 
-    private void formatInitTime(long overallInitTime, long noArgsInitTime) {
+    private void formatInitTime(long overallInitTime, long noArgsInitTime, String threadName) {
         StringBuilder sb = new StringBuilder("Initialization: ");
         sb.append(noArgsInitTime);
         sb.append("ms, ");
         sb.append("with args: ");
         sb.append(overallInitTime);
         sb.append("ms");
+        sb.append(" <font color='#00BFA5'>(" + threadName + ")</font>");
         formattedInitTime = sb.toString();
         warningLevel = getWarningLevel(noArgsInitTime);
     }
 
-    private void initDescriptionsTree(Set<InitMetric> initMetrics, int depthLevel) {
+    private void initDescriptionsTree(Set<InitMetric> initMetrics, int depthLevel, String prev) {
         if (depthLevel == 0 && initMetrics.size() == 0) {
             descriptionTreeItems.add(new MetricDescriptionTreeItem("No args or args initialized before", 0));
         }
+        int size = initMetrics.size();
+        int count = 0;
         for (InitMetric initMetric : initMetrics) {
             final long initTimeWithoutArgs = initMetric.getInitTimeWithoutArgs();
             final long totalInitTime = initMetric.getTotalInitTime();
             final int warningLevel = getWarningLevel(initTimeWithoutArgs);
 
-            String depthStr = new String(new char[depthLevel]).replace("\0", "\t\t");
-            StringBuilder sb = new StringBuilder(depthStr);
-            sb.append("|__<b>");
+            String depthStr = prev + "│" + space(1);
+            String edgeChar = "├";
+            String secondRowChar = "│";
+            if (count == size - 1) {
+                edgeChar = "└";
+                secondRowChar = space(1);
+                depthStr = prev + space(2);
+            }
+
+            StringBuilder sb = new StringBuilder(prev);
+            sb.append(edgeChar + "─● <b>");
             sb.append(initMetric.getSimpleClassName());
-            sb.append("</b>: ");
+            sb.append("</b><br/>");
+            sb.append(prev + secondRowChar + space(1));
             sb.append(initTimeWithoutArgs);
             sb.append("ms, with args: ");
             sb.append(totalInitTime);
             sb.append("ms");
+            sb.append(" <font color='#00BFA5'>(" + initMetric.threadName + ")</font>");
             descriptionTreeItems.add(new MetricDescriptionTreeItem(sb.toString(), warningLevel));
             if (initMetric.args.size() > 0) {
-                initDescriptionsTree(initMetric.args, depthLevel + 1);
+                initDescriptionsTree(initMetric.args, depthLevel + 1, depthStr);
             }
+
+            count++;
         }
     }
 
@@ -73,5 +90,13 @@ public class MetricDescription extends MetricDescriptionTreeItem {
         } else {
             return 3;
         }
+    }
+
+    private String space(int count) {
+        String spaceChar = "\u2000\u2006";
+        for (int i = 0; i < count - 1; i++) {
+            spaceChar += spaceChar;
+        }
+        return spaceChar;
     }
 }
