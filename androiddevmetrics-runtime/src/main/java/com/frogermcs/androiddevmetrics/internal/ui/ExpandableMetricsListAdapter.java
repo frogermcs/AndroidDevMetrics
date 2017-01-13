@@ -122,7 +122,7 @@ public class ExpandableMetricsListAdapter extends BaseExpandableListAdapter {
 
         public void bindView(MetricDescription metricDescription) {
             tvClassName.setText(metricDescription.className);
-            tvInitTime.setText(metricDescription.formattedInitTime);
+            tvInitTime.setText(Html.fromHtml(metricDescription.formattedInitTime));
 
             final Resources resources = tvClassName.getContext().getResources();
             if (metricDescription.warningLevel == 1) {
