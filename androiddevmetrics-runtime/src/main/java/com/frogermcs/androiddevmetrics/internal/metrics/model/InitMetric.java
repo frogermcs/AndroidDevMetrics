@@ -15,6 +15,7 @@ public class InitMetric {
     public int instanceNo = 0;
     public String threadName = "";
     public Set<InitMetric> args = new HashSet<>();
+    public StackTraceElement[] traceElements;
 
     public long getTotalInitTime() {
         long total = initTimeMillis;

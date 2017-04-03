@@ -1,6 +1,5 @@
 package com.frogermcs.androiddevmetrics.internal.metrics;
 
-import com.frogermcs.androiddevmetrics.AndroidDevMetrics;
 import com.frogermcs.androiddevmetrics.internal.MetricDescription;
 import com.frogermcs.androiddevmetrics.internal.metrics.model.InitMetric;
 import com.frogermcs.androiddevmetrics.internal.ui.interceptor.UIInterceptor;
@@ -33,6 +32,7 @@ public class InitManager {
         initMetric.initTimeMillis = initTimeMillis;
         initMetric.cls = initializedClass;
         initMetric.threadName = Thread.currentThread().getName();
+        initMetric.traceElements = Thread.currentThread().getStackTrace();
 
         String simpleName = initializedClass.getName();
         if (!initializedMetrics.containsKey(simpleName)) {
