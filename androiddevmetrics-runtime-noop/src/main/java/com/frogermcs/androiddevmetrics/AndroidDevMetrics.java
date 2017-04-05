@@ -88,6 +88,10 @@ public class AndroidDevMetrics {
       return this;
     }
 
+    public Builder addUIInterceptor(Object interceptor) {
+      return this;
+    }
+
     /** stub **/
     public AndroidDevMetrics build() {
       return new AndroidDevMetrics(null);

@@ -2,6 +2,7 @@ package com.frogermcs.androiddevmetrics.internal.metrics;
 
 import com.frogermcs.androiddevmetrics.internal.MetricDescription;
 import com.frogermcs.androiddevmetrics.internal.metrics.model.InitMetric;
+import com.frogermcs.androiddevmetrics.internal.ui.interceptor.UIInterceptor;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,6 +32,7 @@ public class InitManager {
         initMetric.initTimeMillis = initTimeMillis;
         initMetric.cls = initializedClass;
         initMetric.threadName = Thread.currentThread().getName();
+        initMetric.traceElements = Thread.currentThread().getStackTrace();
 
         String simpleName = initializedClass.getName();
         if (!initializedMetrics.containsKey(simpleName)) {
@@ -62,9 +64,10 @@ public class InitManager {
         }
     }
 
-    public List<MetricDescription> getListOfMetricDescriptions() {
+    public List<MetricDescription> getListOfMetricDescriptions(UIInterceptor interceptor) {
         List<MetricDescription> metricDescriptions = new ArrayList<>();
-        for (InitMetric initMetric : InitManager.getInstance().initializedMetrics.values()) {
+        List<InitMetric> displayList = interceptor.intercept(new ArrayList<>(InitManager.getInstance().initializedMetrics.values()));
+        for (InitMetric initMetric : displayList) {
             metricDescriptions.add(MetricDescription.InitFromMetric(initMetric));
         }
         return metricDescriptions;

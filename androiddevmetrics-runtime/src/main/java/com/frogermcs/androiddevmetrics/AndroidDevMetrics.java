@@ -14,6 +14,11 @@ import com.frogermcs.androiddevmetrics.internal.metrics.ActivityLaunchMetrics;
 import com.frogermcs.androiddevmetrics.internal.metrics.ChoreographerMetrics;
 import com.frogermcs.androiddevmetrics.internal.metrics.InitManager;
 import com.frogermcs.androiddevmetrics.internal.ui.MetricsActivity;
+import com.frogermcs.androiddevmetrics.internal.ui.interceptor.DefaultInterceptor;
+import com.frogermcs.androiddevmetrics.internal.ui.interceptor.UIInterceptor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -37,6 +42,7 @@ public class AndroidDevMetrics {
     private boolean enableDagger2Metrics;
     private int intervalMillis;
     private double maxFpsForFrameDrop;
+    private List<UIInterceptor> interceptors;
 
     /**
      * Enable Activity and Dagger 2 metrics
@@ -128,6 +134,10 @@ public class AndroidDevMetrics {
         mNotificationManager.notify("AndroidDevMetrics".hashCode(), mBuilder.build());
     }
 
+    public List<UIInterceptor> interceptors() {
+        return interceptors;
+    }
+
     public static class Builder {
         private final Context context;
         private int dagger2WarningLevel1 = DAGGER2_WARNING_1_LIMIT_MILLIS;
@@ -139,12 +149,15 @@ public class AndroidDevMetrics {
         private boolean autoCancelNotification = false;
         private int intervalMillis = FRAME_DROPS_DEFAULT_INTERVAL_MS;
         private double maxFpsForFrameDrop = FRAME_DROPS_FPS_LIMIT;
+        private List<UIInterceptor> interceptors;
 
         public Builder(Context context) {
             if (context == null) {
                 throw new IllegalArgumentException("Context must not be null.");
             } else {
                 this.context = context.getApplicationContext();
+                this.interceptors = new ArrayList<>();
+                this.interceptors.add(new DefaultInterceptor());
             }
         }
 
@@ -190,6 +203,11 @@ public class AndroidDevMetrics {
             return this;
         }
 
+        public Builder addUIInterceptor(UIInterceptor interceptor) {
+            this.interceptors.add(interceptor);
+            return this;
+        }
+
         public AndroidDevMetrics build() {
             AndroidDevMetrics androidDevMetrics = new AndroidDevMetrics(context);
             androidDevMetrics.dagger2WarningLevel1 = this.dagger2WarningLevel1;
@@ -201,6 +219,7 @@ public class AndroidDevMetrics {
             androidDevMetrics.maxFpsForFrameDrop = this.maxFpsForFrameDrop;
             androidDevMetrics.intervalMillis = this.intervalMillis;
             androidDevMetrics.autoCancelNotification = this.autoCancelNotification;
+            androidDevMetrics.interceptors = this.interceptors;
             return androidDevMetrics;
         }
     }

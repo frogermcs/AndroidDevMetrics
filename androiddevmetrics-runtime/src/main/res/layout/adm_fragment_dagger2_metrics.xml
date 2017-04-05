@@ -6,6 +6,16 @@
     android:background="#f5f5f5"
     android:orientation="vertical">
 
+    <Button
+        android:id="@+id/btnMenu"
+        android:background="@color/d2m_bg_warning_1"
+        android:text="@string/adm_name"
+        android:layout_width="match_parent"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:padding="0dp"
+        android:layout_height="wrap_content" />
+
     <ExpandableListView
         android:id="@+id/lvMetrics"
         android:layout_width="match_parent"
