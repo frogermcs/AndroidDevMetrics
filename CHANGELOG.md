@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 0.5 *(2017-04-05)*
+----------------------------
+
+* New: Allow custom extension to the library using Interceptor like pattern. (Thanks Amulya Khare)!
+
 Version 0.4 *(2015-03-21)*
 ----------------------------
 

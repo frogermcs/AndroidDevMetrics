@@ -35,7 +35,7 @@ In your `build.gradle`:
   }
 
   dependencies {
-    classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.4'
+    classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.5'
   }
 }
 
