@@ -87,6 +87,11 @@ public class AndroidDevMetrics {
     public Builder enableDagger2Metrics(boolean enable) {
       return this;
     }
+    
+    /** stub **/
+    public Builder autoCancelNotification(boolean autoCancelNotification) {
+      return this;
+    }
 
     public Builder addUIInterceptor(Object interceptor) {
       return this;
