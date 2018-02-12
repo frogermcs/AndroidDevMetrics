@@ -23,8 +23,8 @@ repositories {
 
 dependencies {
     compile 'org.aspectj:aspectjrt:1.8.8'
-    compile 'com.android.support:support-v4:24.0.0'
-    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:support-compat:24.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
 }
 
 android {
