@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.6 *(2018-02-12)*
+----------------------------
+
+* Maintenance: Updated dependencies
+* Fix: Support for notifications on Android 26
+
 Version 0.5 *(2017-04-05)*
 ----------------------------
 

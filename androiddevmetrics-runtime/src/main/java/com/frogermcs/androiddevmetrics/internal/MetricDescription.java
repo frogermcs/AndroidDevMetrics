@@ -52,17 +52,17 @@ public class MetricDescription extends MetricDescriptionTreeItem {
             final long totalInitTime = initMetric.getTotalInitTime();
             final int warningLevel = getWarningLevel(initTimeWithoutArgs);
 
-            String depthStr = prev + "│" + space(1);
-            String edgeChar = "├";
-            String secondRowChar = "│";
+            String depthStr = prev + "\u2502" + space(1);
+            String edgeChar = "\u251c";
+            String secondRowChar = "\u2502";
             if (count == size - 1) {
-                edgeChar = "└";
+                edgeChar = "\u2514";
                 secondRowChar = space(1);
                 depthStr = prev + space(2);
             }
 
             StringBuilder sb = new StringBuilder(prev);
-            sb.append(edgeChar + "─● <b>");
+            sb.append(edgeChar + "\u2500\u25CF <b>");
             sb.append(initMetric.getSimpleClassName());
             sb.append("</b><br/>");
             sb.append(prev + secondRowChar + space(1));

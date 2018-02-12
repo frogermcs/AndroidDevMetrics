@@ -26,10 +26,10 @@ public class AndroidDevMetricsPlugin implements Plugin<Project> {
     }
 
     project.dependencies {
-      releaseCompile 'com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:0.5'
-      debugCompile 'com.frogermcs.androiddevmetrics:androiddevmetrics-runtime:0.5'
+      releaseCompile 'com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:0.6'
+      debugCompile 'com.frogermcs.androiddevmetrics:androiddevmetrics-runtime:0.6'
       debugCompile 'org.aspectj:aspectjrt:1.8.8'
-      compile 'com.android.support:support-v4:23.1.1'
+      compile 'com.android.support:support-v4:26.1.0'
     }
 
     variants.all { variant ->

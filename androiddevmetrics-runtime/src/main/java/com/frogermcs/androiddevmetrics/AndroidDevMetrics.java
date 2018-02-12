@@ -1,10 +1,12 @@
 package com.frogermcs.androiddevmetrics;
 
 import android.app.Application;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.frogermcs.androiddevmetrics.aspect.ActivityLifecycleAnalyzer;
@@ -46,7 +48,7 @@ public class AndroidDevMetrics {
 
     /**
      * Enable Activity and Dagger 2 metrics
-     * */
+     */
     public static AndroidDevMetrics initWith(Context context) {
         Builder androidDevMetricsBuilder = new Builder(context)
                 .enableActivityMetrics(true)
@@ -121,17 +123,42 @@ public class AndroidDevMetrics {
     }
 
     private void showNotification() {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
-                .setSmallIcon(R.drawable.ic_timeline_white_18dp)
-                .setContentTitle(context.getString(R.string.adm_name))
-                .setContentText("Click to see current metrics")
-                .setAutoCancel(autoCancelNotification);
-
-        Intent resultIntent = new Intent(context, MetricsActivity.class);
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-        mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify("AndroidDevMetrics".hashCode(), mBuilder.build());
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            String notificationChannel = "AndroidDevMetrics";
+            NotificationChannel mChannel = mNotificationManager.getNotificationChannel(notificationChannel);
+            if (mChannel == null) {
+                mChannel = new NotificationChannel(notificationChannel, notificationChannel, importance);
+                mChannel.setDescription(notificationChannel);
+                mChannel.enableVibration(true);
+                mChannel.setVibrationPattern(new long[]{100, 200, 300, 400, 500, 400, 300, 200, 400});
+                mNotificationManager.createNotificationChannel(mChannel);
+            }
+
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, notificationChannel)
+                    .setSmallIcon(R.drawable.ic_timeline_white_18dp)
+                    .setContentTitle(context.getString(R.string.adm_name))
+                    .setContentText("Click to see current metrics")
+                    .setAutoCancel(autoCancelNotification);
+
+            Intent resultIntent = new Intent(context, MetricsActivity.class);
+            PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(resultPendingIntent);
+            mNotificationManager.notify("AndroidDevMetrics".hashCode(), mBuilder.build());
+        } else {
+            NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context)
+                    .setSmallIcon(R.drawable.ic_timeline_white_18dp)
+                    .setContentTitle(context.getString(R.string.adm_name))
+                    .setContentText("Click to see current metrics")
+                    .setAutoCancel(autoCancelNotification);
+
+            Intent resultIntent = new Intent(context, MetricsActivity.class);
+            PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+            mBuilder.setContentIntent(resultPendingIntent);
+            mNotificationManager.notify("AndroidDevMetrics".hashCode(), mBuilder.build());
+        }
     }
 
     public List<UIInterceptor> interceptors() {

@@ -7,15 +7,15 @@ buildscript {
 
         // for local snapshots
         mavenLocal()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'org.aspectj:aspectjtools:1.8.8'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-        classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.5'
+        classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.6'
     }
 }
 
@@ -25,13 +25,12 @@ allprojects {
         maven {
             url 'https://dl.bintray.com/frogermcs/maven/'
         }
+        maven {
+            url "https://maven.google.com"
+        }
 
         // for local snapshots
         mavenLocal()
+        google()
     }
-}
-
-ext {
-    compileSdkVersion = 24
-    buildToolsVersion = '25.0.0'
 }
