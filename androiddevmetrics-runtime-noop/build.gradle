@@ -147,10 +147,6 @@ bintray {
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
     classifier = 'sources'
-
-    println "mirek"
-    println BINTRAY_GPG_PASSWORD
-    println project.hasProperty('BINTRAY_GPG_PASSWORD')
 }
 
 task javadoc(type: Javadoc) {
