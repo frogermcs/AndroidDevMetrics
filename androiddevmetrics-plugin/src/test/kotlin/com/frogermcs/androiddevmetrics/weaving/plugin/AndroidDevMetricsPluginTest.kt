@@ -2,7 +2,7 @@ package com.frogermcs.androiddevmetrics.weaving.plugin
 
 import com.android.build.gradle.AppPlugin
 import com.android.build.gradle.LibraryPlugin
-import junit.framework.Assert.assertNotNull
+import org.junit.Assert.assertNotNull
 import org.gradle.api.GradleException
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.Test
