@@ -90,6 +90,13 @@ Finally, if you want to understand where most of performance issues come from, h
 
 You can check [GithubClient](https://github.com/frogermcs/githubclient) - example Android app which shows how to use Dagger 2. Most recent version uses **AndroidDevMetrics** for measuring performance.
 
+## Building AndroidDevMetrics
+
+Build AndroidDevMetrics plugin with [`./gradlew clean build`]. The tests can be run with
+`./gradlew clean test`. To install the plugin in your local maven repository (usually located at
+`~/.m2/repository`) use `./gradlew clean install`. You can change `VERSION_NAME` value in `gradle.properties`
+to easily recognise your version.
+
 ## License
 
     Copyright 2016 Miroslaw Stanek
