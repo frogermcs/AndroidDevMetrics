@@ -14,10 +14,10 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    compile 'com.android.tools.build:gradle:3.0.1'
+    compile 'com.android.tools.build:gradle:3.3.2'
     compile 'org.aspectj:aspectjtools:1.8.8'
     compile 'org.aspectj:aspectjrt:1.8.8'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:1.2.21"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:1.3.21"
     testCompile "junit:junit:4.12"
 }
 

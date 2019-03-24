@@ -50,7 +50,7 @@ android {
 }
 
 android.libraryVariants.all { variant ->
-    JavaCompile javaCompile = variant.javaCompile
+    JavaCompile javaCompile = variant.javaCompileProvider.get()
     javaCompile.doLast {
         String[] args = ["-showWeaveInfo",
                          "-1.5",
