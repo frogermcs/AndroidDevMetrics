@@ -21,9 +21,9 @@ repositories {
 }
 
 dependencies {
-    compile 'org.aspectj:aspectjrt:1.8.8'
-    compile 'com.android.support:support-compat:26.1.0'
-    compile 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'org.aspectj:aspectjrt:1.8.8'
+    implementation 'com.android.support:support-compat:26.1.0'
+    implementation 'com.android.support:appcompat-v7:26.1.0'
 }
 
 android {
