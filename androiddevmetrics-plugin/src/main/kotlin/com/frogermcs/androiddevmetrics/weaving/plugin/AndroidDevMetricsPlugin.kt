@@ -41,7 +41,7 @@ class AndroidDevMetricsPlugin: Plugin<Project> {
                     return@all
                 }
 
-                val javaCompiler = variant.javaCompiler as AbstractCompile
+                val javaCompiler = variant.javaCompileProvider.get() as AbstractCompile
                 javaCompiler.doLast({
                     val args = arrayOf(
                             "-showWeaveInfo",
