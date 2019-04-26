@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+Version 0.7 *(2019-04-26)*
+--------------------------
+
+* Maintenance: fixed Gradle warnings (Kudos AndrewHeyO, erykrutkowski!)
+* Maintenance: Groovy plugin rewritten to Kotlin (Kudos skrzyneckik!)
+
 Version 0.6 *(2018-02-12)*
 ----------------------------
 

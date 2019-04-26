@@ -12,26 +12,24 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.3.2'
         classpath 'org.aspectj:aspectjtools:1.8.8'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.5'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-        classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.6'
+        classpath 'com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:0.7'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.21"
     }
 }
 
 allprojects {
     repositories {
+        google()
+        jcenter()
         mavenCentral()
         maven {
             url 'https://dl.bintray.com/frogermcs/maven/'
         }
-        maven {
-            url "https://maven.google.com"
-        }
 
         // for local snapshots
         mavenLocal()
-        google()
     }
 }
